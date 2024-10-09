@@ -51,8 +51,10 @@ class PrettyPrinter extends LoggyPrinter {
         _colorize ? levelColor(record.level) ?? AnsiColor() : AnsiColor();
     final prefix = levelPrefix(record.level) ?? _defaultPrefix;
 
-    print(color(
-        '$prefix$time $logLevel ${record.loggerName} $callerFrame ${record.message}'));
+    if(_colorize)
+    log('$prefix$time $logLevel ${record.loggerName} $callerFrame ${record.message}');
+    else
+    print('$prefix$time $logLevel ${record.loggerName} $callerFrame ${record.message}');
 
     if (record.stackTrace != null) {
       print(record.stackTrace);
